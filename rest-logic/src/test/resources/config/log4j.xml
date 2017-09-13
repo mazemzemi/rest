@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<!-- ============================== -->
+	<!-- Append messages to the console -->
+	<!-- ============================== -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%c %d{HH:mm:ss.SSS} %-5p [%t] - %m\n" />
+		</layout>
+	</appender>
+
+	<!-- ================ -->
+	<!-- Limit categories -->
+	<!-- ================ -->
+
+    <!-- Category for log via mail -->
+	<category name="com.zemzemi.pilote.rest.logic">
+		<priority value="INFO" />
+	</category>
+	
+	<!-- ======================= -->
+	<!-- Setup the Root category -->
+	<!-- ======================= -->
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>

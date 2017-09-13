@@ -1,0 +1,28 @@
+# This is a sample build configuration for Maven.
+# Check our guides at https://confluence.atlassian.com/x/VYk8Lw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: 
+  name: mysql
+  MYSQL_ROOT_PASSWORD: root
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+          - echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+          - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+          - echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+          - apt-get update
+          - apt-get install -y oracle-java8-installer
+          - java -version
+          - apt-get update
+          - apt-get install -y maven
+          - mvn --version
+          - /etc/init.d/mysql start
+          - mysql -h localhost -u root -proot -e "CREATE USER 'root'@'%' IDENTIFIED BY 'root';"
+          - mysql -h localhost -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+          - mysql -h localhost -u root -proot -e "CREATE DATABASE test_pilote_rest"
+          - mvn clean install
+                     
