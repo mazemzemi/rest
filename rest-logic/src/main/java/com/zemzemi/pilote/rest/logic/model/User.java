@@ -47,6 +47,7 @@ public class User implements Serializable {
 	@JsonProperty("name")
 	private String name;
 
+	private String test;
 	/**
 	 * {@link User#birthday} attribute.
 	 */
