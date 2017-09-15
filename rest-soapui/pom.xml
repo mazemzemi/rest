@@ -6,6 +6,6 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>rest-soapui</artifactId>
-  <name>rest.soapui</name>
+  <name>REST soapui</name>
   <description>REST SOAPUI module to test web services REST automatically with script test suite of soapui</description>
 </project>

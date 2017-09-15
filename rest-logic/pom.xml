@@ -7,7 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>rest-logic</artifactId>
-	<name>rest.logic</name>
+	<name>REST logic</name>
 	<description>REST LOGIC module reserves to the business logic of the REST project.</description>
 
 	<dependencies>

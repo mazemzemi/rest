@@ -7,6 +7,6 @@
   </parent>
   <artifactId>rest-ws</artifactId>
   <packaging>war</packaging>
-  <name>REST WS</name>
+  <name>REST ws</name>
   <description>REST WS module to expose the logic of the REST project as a web service.</description>
 </project>
