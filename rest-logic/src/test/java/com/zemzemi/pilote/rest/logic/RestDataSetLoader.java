@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.springframework.core.io.Resource;
@@ -14,12 +16,17 @@ import org.springframework.core.io.Resource;
 import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 
 /**
- * The class {@link RestDataSetLoader} allows us to use some 'non-static'
- * values in datasets.
+ * The class {@link RestDataSetLoader} allows us to use some 'non-static' values
+ * in datasets.
  * 
  * @author zemzmi
  */
 public class RestDataSetLoader extends AbstractDataSetLoader {
+
+	/**
+	 * {@link LOGGER}.
+	 */
+	private static final Logger LOGGER = LogManager.getLogger(RestDataSetLoader.class);
 
 	/**
 	 * To replace a specific word in dataset files.
@@ -31,12 +38,10 @@ public class RestDataSetLoader extends AbstractDataSetLoader {
 		try (InputStream inputStream = resource.getInputStream()) {
 
 			String fichier = new String(readFromStream(inputStream));
-			SimpleDateFormat dateFormatWithTime = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat dateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 			Date nowTime = new Date();
-			fichier = fichier.replaceAll("\\[NowWithTime\\]",
-					dateFormatWithTime.format(nowTime));
+			fichier = fichier.replaceAll("\\[NowWithTime\\]", dateFormatWithTime.format(nowTime));
 
 			return builder.build(new ByteArrayInputStream(fichier.getBytes()));
 		}
@@ -58,6 +63,7 @@ public class RestDataSetLoader extends AbstractDataSetLoader {
 			}
 			return baos.toByteArray();
 		} catch (IOException ioe) {
+			LOGGER.info(ioe);
 			return new byte[0];
 		}
 	}
