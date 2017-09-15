@@ -23,12 +23,16 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContextTest.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		TransactionalTestExecutionListener.class,
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class,
 		DbUnitTestExecutionListener.class })
 @DbUnitConfiguration(dataSetLoader = RestDataSetLoader.class)
 @Ignore
 public class GlobalTestCase {
+
+	/**
+	 * Default logger.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalTestCase.class);
 
 	/**
 	 * Constructor.
@@ -39,22 +43,13 @@ public class GlobalTestCase {
 	}
 
 	/**
-	 * Default logger.
-	 */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(GlobalTestCase.class);
-
-	/**
 	 * Memory dump.
 	 */
 	@AfterClass
 	public static void afterClass() {
 
-		LOGGER.info("Free memory  : " + Runtime.getRuntime().freeMemory()
-				+ " bytes");
-		LOGGER.info("Max memory   : " + Runtime.getRuntime().maxMemory()
-				+ " bytes");
-		LOGGER.info("Total memory : " + Runtime.getRuntime().totalMemory()
-				+ " bytes");
+		LOGGER.info("Free memory  : " + Runtime.getRuntime().freeMemory());
+		LOGGER.info("Max memory   : " + Runtime.getRuntime().maxMemory());
+		LOGGER.info("Total memory : " + Runtime.getRuntime().totalMemory());
 	}
 }

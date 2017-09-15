@@ -10,6 +10,7 @@ import com.zemzemi.pilote.rest.logic.model.User;
  * @author zemzmi
  * @since 2016-12-08.
  */
+@FunctionalInterface
 public interface UpdateBalanceService {
 
 	/**
